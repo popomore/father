@@ -1,7 +1,7 @@
 {
   "name": "father",
   "version": "0.1.0",
-  "description": "package parser",
+  "description": "A package parser that can resolve self and dependencies, supporting spm, component.",
   "main": "index",
   "dependencies": {
     "semver": "^2.2.1",
