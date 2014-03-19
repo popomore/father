@@ -15,7 +15,7 @@ describe('Father', function() {
     pkg.main.should.eql('a.js');
     pkg.name.should.eql('a');
     pkg.version.should.eql('1.0.0');
-    pkg.files['a.js'].dependencies.should.eql(['b', './b', 'd', 'c']);
+    pkg.files['a.js'].dependencies.should.eql(['b', './b', 'd', './a.json', 'c']);
     pkg.files['b.js'].dependencies.should.eql(['b', 'c']);
     pkgDeps['b'].should.eql(pkg.get('b@1.1.0'));
     pkgDeps['c'].should.eql(pkg.get('c@1.1.1'));
