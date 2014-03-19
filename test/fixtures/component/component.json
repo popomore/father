@@ -1,0 +1,13 @@
+{
+  "name": "test",
+  "version": "1.0.0",
+  "scripts": [
+    "src/index.js"
+  ],
+  "main": "src/index.js",
+  "dependencies": {
+    "component/each": "*",
+    "component/to-function": "1.0.0"
+  },
+  "remotes": []
+}
