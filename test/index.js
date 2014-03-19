@@ -1,12 +1,11 @@
 'use strict';
 
-var path = require('path');
-var join = path.join;
-var should = require('should');
+var join = require('path').join;
 var father = require('..');
 var SpmPackage = father.SpmPackage;
 var ComponentPackage = father.ComponentPackage;
 var base = join(__dirname, 'fixtures');
+require('should');
 
 describe('Father', function() {
 
