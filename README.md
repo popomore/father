@@ -1,4 +1,4 @@
-# father [![Build Status](https://travis-ci.org/popomore/father.png?branch=master)](https://travis-ci.org/popomore/father) [![Coverage Status](https://coveralls.io/repos/popomore/father/badge.png?branch=master)](https://coveralls.io/r/popomore/father?branch=master) 
+# father [![Build Status](https://travis-ci.org/popomore/father.png?branch=master)](https://travis-ci.org/popomore/father) [![Coverage Status](https://coveralls.io/repos/popomore/father/badge.png?branch=master)](https://coveralls.io/r/popomore/father?branch=master)
 
 A package parser that can resolve self and dependencies, supporting spm/component.
 
@@ -31,8 +31,8 @@ var Package = require('father').Package;
 var Custom = Package.extend({
   readPackage: function() {
     // read config file, E.g. component.json
-    // return a package contains id, name, version, dependencies, main, dest, origin
-    // dependencies should contain id, dest 
+    // return a package contains id, name, version, dependencies, main, dest, files, origin
+    // dependencies should contain id, dest
   };
 })
 ```
@@ -51,6 +51,20 @@ Example for returned object by readPackage
       id: 'b',
       dest: '/home/user/a/components/b'
     }
+  }
+}
+```
+
+### Files
+
+pkg.files contains export files and it's dependencies in your module.
+
+Example below
+
+```
+{
+  files: {
+    'index.js': ['each', './feature']
   }
 }
 ```
