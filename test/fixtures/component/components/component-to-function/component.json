@@ -6,7 +6,6 @@
   "keywords": [
     "utility"
   ],
-  "dependencies": {},
   "development": {},
   "scripts": [
     "index.js"
