@@ -1,0 +1,10 @@
+{
+  "name": "a",
+  "version": "1.0.0",
+  "main": "a.js",
+  "spm": {
+    "dependencies": {
+      "b": "0.0.1"
+    }
+  }
+}

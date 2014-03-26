@@ -90,4 +90,9 @@ describe('Father', function() {
     pkg.dependencies.should.eql({});
   });
 
+  it('version cache', function() {
+    var pkg = new SpmPackage(join(base, 'version-cache'));
+    var b = pkg.dependencies['b'];
+    b.version.should.eql('0.0.1');
+  });
 });
