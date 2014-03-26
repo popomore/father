@@ -6,6 +6,7 @@
 
 - lazy parse
 - trigger `notfound` event when parse a not existed file
+- support handlebars, add extra `handlebars` to deps
 
 ## 0.2.1
 
