@@ -2,6 +2,11 @@
 
 ---
 
+## 0.3.0
+
+- lazy parse
+- trigger `notfound` event when parse a not existed file
+
 ## 0.2.1
 
 fix replace .js

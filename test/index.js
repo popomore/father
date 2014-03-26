@@ -82,4 +82,12 @@ describe('Father', function() {
     func.files['index.js'].dependencies.should.eql([]);
   });
 
+  it('not found', function() {
+    var pkg = new SpmPackage(join(base, 'not-found'));
+    pkg.on('notfound', function(src) {
+      src.should.eql('b.js');
+    });
+    pkg.dependencies.should.eql({});
+  });
+
 });

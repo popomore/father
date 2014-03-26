@@ -55,6 +55,17 @@ Example for returned object by readPackage
 }
 ```
 
+## Properties
+
+- pkg.id
+- pkg.name
+- pkg.version
+- pkg.main
+- pkg.origin
+- pkg.files 
+- pkg.dest 
+- pkg.get(depPackage.id)
+
 ### Files
 
 pkg.files contains export files and it's dependencies in your module.
