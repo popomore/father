@@ -5,6 +5,7 @@
 ## 0.4.0
 
 - add output as same as main
+- move main to spm.main
 
 ## 0.3.1
 
