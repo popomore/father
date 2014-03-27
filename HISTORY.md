@@ -6,6 +6,10 @@
 
 - add output as same as main
 
+## 0.3.1
+
+fix versionCache, use dest as key instead
+
 ## 0.3.0
 
 - lazy parse
