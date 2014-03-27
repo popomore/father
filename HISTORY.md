@@ -2,6 +2,10 @@
 
 ---
 
+## 0.4.1
+
+- resolve dependent file path
+
 ## 0.4.0
 
 - add output as same as main
