@@ -5,12 +5,14 @@ var father = require('..');
 var SpmPackage = father.SpmPackage;
 var ComponentPackage = father.ComponentPackage;
 var base = join(__dirname, 'fixtures');
-require('should');
+var should = require('should');
 
 describe('Father', function() {
 
   it('Spm package', function() {
     var pkg = new SpmPackage(join(base, 'spm'));
+    pkg.output.should.eql(['c.js']);
+    should.exists(pkg.files['c.js']);
     var pkgDeps = pkg.dependencies;
     pkg.main.should.eql('a.js');
     pkg.name.should.eql('a');
@@ -52,6 +54,8 @@ describe('Father', function() {
   it('Component package', function() {
     var pkg = new ComponentPackage(join(base, 'component'));
     var pkgDeps = pkg.dependencies;
+    pkg.output.should.eql(['src/index.js']);
+    should.exists(pkg.files['src/index.js']);
     pkg.main.should.eql('src/index.js');
     pkg.name.should.eql('test');
     pkg.version.should.eql('1.0.0');
@@ -94,5 +98,11 @@ describe('Father', function() {
     var pkg = new SpmPackage(join(base, 'version-cache'));
     var b = pkg.dependencies['b'];
     b.version.should.eql('0.0.1');
+  });
+
+  it('output', function() {
+    var pkg = new SpmPackage(join(base, 'output'));
+    pkg.output.should.eql(['a.js', 'b.js']);
+    Object.keys(pkg.files).should.eql(['a1.js', 'a.js', 'b1.js', 'b.js']);
   });
 });

@@ -2,6 +2,10 @@
 
 ---
 
+## 0.4.0
+
+- add output as same as main
+
 ## 0.3.0
 
 - lazy parse

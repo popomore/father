@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "main": "a.js",
   "spm": {
+    "output": ["c.js"],
     "dependencies": {
       "b": "1.1.0",
       "c": "1.1.1",
