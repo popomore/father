@@ -105,4 +105,12 @@ describe('Father', function() {
     pkg.output.should.eql(['a.js', 'b.js']);
     Object.keys(pkg.files).should.eql(['a1.js', 'a.js', 'b1.js', 'b.js']);
   });
+
+  it('resolve deps', function() {
+    var pkg = new SpmPackage(join(base, 'resolve-deps'));
+    pkg.files['src/c.js'].dependencies.should.eql(['../a', '../b', './d']);
+    pkg.files['src/d.js'].dependencies.should.eql([]);
+    pkg.files['a.js'].dependencies.should.eql(['./b', './src/d']);
+    pkg.files['b.js'].dependencies.should.eql([]);
+  });
 });

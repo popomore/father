@@ -1,0 +1,8 @@
+{
+  "name": "a",
+  "version": "1.0.0",
+  "spm": {
+    "main": "a.js",
+    "output": ["src/c.js"]
+  }
+}
