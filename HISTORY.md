@@ -2,9 +2,11 @@
 
 ---
 
-## 0.4.1
+## 0.5.0
 
 - resolve dependent file path
+- refactor lookupFiles
+- parse css dependency
 
 ## 0.4.0
 
