@@ -9,7 +9,7 @@ var should = require('should');
 describe('Father.SpmPackage', function() {
 
   it('normal', function() {
-    var pkg = getPackage('normal');
+    var pkg = getPackage('normal', {extraDeps: {handlebars: 'handlebars'}});
     pkg.output.should.eql(['c.js']);
     should.exists(pkg.files['c.js']);
     var pkgDeps = pkg.dependencies;
@@ -96,6 +96,6 @@ describe('Father.SpmPackage', function() {
   });
 });
 
-function getPackage(name) {
-  return new SpmPackage(join(base, name));
+function getPackage(name, options) {
+  return new SpmPackage(join(base, name), options);
 }
