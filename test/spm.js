@@ -16,7 +16,7 @@ describe('Father.SpmPackage', function() {
     pkg.main.should.eql('a.js');
     pkg.name.should.eql('a');
     pkg.version.should.eql('1.0.0');
-    pkg.files['a.js'].dependencies.should.eql(['b', './b', 'd', './a.json', './a.handlebars', 'handlebars', 'c']);
+    pkg.files['a.js'].dependencies.should.eql(['b', './b', 'c', 'd', './a.json', './a.handlebars', 'handlebars']);
     pkg.files['b.js'].dependencies.should.eql(['b', 'c']);
     pkgDeps['b'].should.eql(pkg.get('b@1.1.0'));
     pkgDeps['c'].should.eql(pkg.get('c@1.1.1'));
@@ -76,6 +76,13 @@ describe('Father.SpmPackage', function() {
     pkg.files['src/d.js'].dependencies.should.eql([]);
     pkg.files['a.js'].dependencies.should.eql(['./b', './src/d']);
     pkg.files['b.js'].dependencies.should.eql([]);
+  });
+
+  it('css', function() {
+    var pkg = getPackage('css');
+    Object.keys(pkg.files).should.eql(['base.css', 'index.css']);
+    pkg.files['index.css'].dependencies.should.eql(['./base.css']);
+    pkg.files['base.css'].dependencies.should.eql([]);
   });
 });
 
