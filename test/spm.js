@@ -84,6 +84,16 @@ describe('Father.SpmPackage', function() {
     pkg.files['index.css'].dependencies.should.eql(['./base.css']);
     pkg.files['base.css'].dependencies.should.eql([]);
   });
+
+  it('css-deps', function() {
+    var pkg = getPackage('css-deps');
+    Object.keys(pkg.files).should.eql(['index.css']);
+    pkg.files['index.css'].dependencies.should.eql(['b']);
+
+    var bPkg = pkg.dependencies.b;
+    bPkg.files['src/b.css'].dependencies.should.eql(['./c.css']);
+    bPkg.files['src/c.css'].dependencies.should.eql([]);
+  });
 });
 
 function getPackage(name) {
