@@ -2,6 +2,10 @@
 
 ---
 
+## 0.5.1
+
+pass extraDeps to sub package
+
 ## 0.5.0
 
 - resolve dependent file path
