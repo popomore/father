@@ -94,6 +94,12 @@ describe('Father.SpmPackage', function() {
     bPkg.files['src/b.css'].dependencies.should.eql(['./c.css']);
     bPkg.files['src/c.css'].dependencies.should.eql([]);
   });
+
+  it('pass extraDeps', function() {
+    var pkg = getPackage('pass-extradeps', {extraDeps: {handlebars: 'handlebars'}});
+    var bPkg = pkg.dependencies.b;
+    bPkg.files['index.js'].dependencies.should.eql(['./b.handlebars', 'handlebars']);
+  });
 });
 
 function getPackage(name, options) {
