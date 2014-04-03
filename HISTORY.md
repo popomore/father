@@ -4,7 +4,8 @@
 
 ## 0.5.1
 
-pass extraDeps to sub package
+- pass extraDeps to sub package
+- only show css required by js in dependencies
 
 ## 0.5.0
 

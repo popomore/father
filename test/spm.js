@@ -100,6 +100,13 @@ describe('Father.SpmPackage', function() {
     var bPkg = pkg.dependencies.b;
     bPkg.files['index.js'].dependencies.should.eql(['./b.handlebars', 'handlebars']);
   });
+
+  it('js require css', function() {
+    var pkg = getPackage('js-require-css');
+    pkg.files['index.js'].dependencies.should.eql(['./a.css']);
+    pkg.files['a.css'].dependencies.should.eql(['./b.css']);
+    pkg.files['b.css'].dependencies.should.eql([]);
+  });
 });
 
 function getPackage(name, options) {
