@@ -2,6 +2,10 @@
 
 ---
 
+## 0.5.4
+
+requires not support Buffer now
+
 ## 0.5.3
 
 upgrade css-import@0.2.0
