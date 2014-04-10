@@ -2,6 +2,10 @@
 
 ---
 
+## 0.5.3
+
+upgrade css-import@0.2.0
+
 ## 0.5.2
 
 add output option
