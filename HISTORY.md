@@ -2,6 +2,10 @@
 
 ---
 
+## 0.5.2
+
+add output option
+
 ## 0.5.1
 
 - pass extraDeps to sub package

@@ -107,6 +107,12 @@ describe('Father.SpmPackage', function() {
     pkg.files['a.css'].dependencies.should.eql(['./b.css']);
     pkg.files['b.css'].dependencies.should.eql([]);
   });
+
+  it('extra output', function() {
+    var pkg = getPackage('extra-output', {output: ['a.js']});
+    should.exists(pkg.files['a.js']);
+  });
+
 });
 
 function getPackage(name, options) {
