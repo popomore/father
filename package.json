@@ -5,7 +5,7 @@
   "main": "index",
   "dependencies": {
     "arale": "^0.2.0",
-    "css-imports": "^0.1.0",
+    "css-imports": "^0.2.0",
     "debug": "^0.7.4",
     "requires": "^1.0.0",
     "semver": "^2.2.1"
