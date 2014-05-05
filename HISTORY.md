@@ -2,6 +2,10 @@
 
 ---
 
+## 0.5.5
+
+detect main/output type in spm package
+
 ## 0.5.4
 
 requires not support Buffer now
