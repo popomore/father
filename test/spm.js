@@ -113,6 +113,19 @@ describe('Father.SpmPackage', function() {
     should.exists(pkg.files['a.js']);
   });
 
+  it('detect main type', function() {
+    (function() {
+      var pkg = getPackage('main-type-error');
+      pkg.main;
+    }).should.throw('pkg.spm.main should be string.');
+  });
+
+  it('detect output type', function() {
+    (function() {
+      var pkg = getPackage('output-type-error');
+      pkg.main;
+    }).should.throw('pkg.spm.output should be array.');
+  });
 });
 
 function getPackage(name, options) {
