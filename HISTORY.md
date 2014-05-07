@@ -2,6 +2,20 @@
 
 ---
 
+## 0.6.0
+
+- option change: output -> entry
+- update readme
+- improve code structure
+- testcase coverage
+
+## 0.5.6
+
+- export getPackages
+- no dependency will throw
+- ignore extraDeps
+- unmatched version will throw
+
 ## 0.5.5
 
 detect main/output type in spm package
