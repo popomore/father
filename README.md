@@ -80,7 +80,7 @@ The origin package info
 
 Export files when build
 
-## Mothod
+## Method
 
 ### pkg.get(pkg.id)
 
