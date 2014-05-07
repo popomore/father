@@ -127,6 +127,14 @@ describe('Father.SpmPackage', function() {
     }).should.throw('pkg.spm.output should be array.');
   });
 
+  it('cascade dependency', function() {
+    var pkg = getPackage('cascade');
+    var pkgDeps = pkg.dependencies;
+    Object.keys(pkgDeps).should.eql(['b']);
+    pkgDeps['b'].should.eql(pkg.get('b@1.1.0'));
+    pkg.files['a.js'].dependencies.should.eql(['b']);
+  });
+
   it('no matched version', function() {
     (function() {
       var pkg = getPackage('unmatch-version');

@@ -8,7 +8,7 @@ var should = require('should');
 
 describe('Father.ComponentPackage', function() {
 
-  it('normal', function() {
+  xit('normal', function() {
     var pkg = getPackage('component');
     var pkgDeps = pkg.dependencies;
     pkg.output.should.eql(['src/index.js']);
