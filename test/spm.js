@@ -126,6 +126,13 @@ describe('Father.SpmPackage', function() {
       pkg.main;
     }).should.throw('pkg.spm.output should be array.');
   });
+
+  it('no matched version', function() {
+    (function() {
+      var pkg = getPackage('unmatch-version');
+      pkg.main;
+    }).should.throw('no matched version of a');
+  });
 });
 
 function getPackage(name, options) {
