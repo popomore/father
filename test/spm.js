@@ -50,14 +50,6 @@ describe('Father.SpmPackage', function() {
     d2.files['index.js'].dependencies.should.eql([]);
   });
 
-  it('not found', function() {
-    var pkg = getPackage('not-found');
-    pkg.on('notfound', function(src) {
-      src.should.eql('b.js');
-    });
-    pkg.dependencies.should.eql({});
-  });
-
   it('version cache', function() {
     var pkg = getPackage('version-cache');
     var b = pkg.dependencies['b'];
@@ -67,7 +59,7 @@ describe('Father.SpmPackage', function() {
   it('output', function() {
     var pkg = getPackage('output');
     pkg.output.should.eql(['a.js', 'b.js']);
-    Object.keys(pkg.files).should.eql(['a1.js', 'a.js', 'b1.js', 'b.js']);
+    Object.keys(pkg.files).should.eql(['index.js','a1.js', 'a.js', 'b1.js', 'b.js']);
   });
 
   it('resolve deps', function() {
@@ -80,9 +72,10 @@ describe('Father.SpmPackage', function() {
 
   it('css', function() {
     var pkg = getPackage('css');
-    Object.keys(pkg.files).should.eql(['base.css', 'index.css']);
-    pkg.files['index.css'].dependencies.should.eql(['./base.css']);
-    pkg.files['base.css'].dependencies.should.eql([]);
+    Object.keys(pkg.files).should.eql(['other.css', 'base.css', 'index.css']);
+    pkg.files['index.css'].dependencies.should.eql(['./base.css', './other.css']);
+    pkg.files['base.css'].dependencies.should.eql(['./other.css']);
+    pkg.files['other.css'].dependencies.should.eql([]);
   });
 
   it('css-deps', function() {
@@ -108,23 +101,9 @@ describe('Father.SpmPackage', function() {
     pkg.files['b.css'].dependencies.should.eql([]);
   });
 
-  it('extra entry', function() {
-    var pkg = getPackage('extra-output', {entry: ['a.js']});
-    should.exists(pkg.files['a.js']);
-  });
-
-  it('detect main type', function() {
-    (function() {
-      var pkg = getPackage('main-type-error');
-      pkg.main;
-    }).should.throw('pkg.spm.main should be string.');
-  });
-
-  it('detect output type', function() {
-    (function() {
-      var pkg = getPackage('output-type-error');
-      pkg.main;
-    }).should.throw('pkg.spm.output should be array.');
+  it('other entry', function() {
+    var pkg = getPackage('other-entry', {entry: ['a.js']});
+    Object.keys(pkg.files).should.eql(['index.js', 'a.js', 'b.js']);
   });
 
   it('cascade dependency', function() {
@@ -135,11 +114,83 @@ describe('Father.SpmPackage', function() {
     pkg.files['a.js'].dependencies.should.eql(['b']);
   });
 
-  it('no matched version', function() {
-    (function() {
-      var pkg = getPackage('unmatch-version');
-      pkg.main;
-    }).should.throw('no matched version of a');
+  it('get method', function() {
+    var pkg = getPackage('normal');
+    var b = pkg.get('b@1.1.0');
+    b.main.should.eql('src/b.js');
+    b.name.should.eql('b');
+    b.version.should.eql('1.1.0');
+    Object.keys(b.dependencies).should.eql(['d', 'c']);
+    Object.keys(b.files).should.eql(['src/b.tpl', 'src/b.js']);
+
+    var self = pkg.get('a@1.0.0');
+    self.should.equal(pkg);
+  });
+
+  it('set method', function() {
+    var pkg = getPackage('normal');
+    pkg.set({id: 'b@1.1.0'});
+    pkg.get('b@1.1.0').should.eql({id: 'b@1.1.0'});
+
+    pkg._parse();
+    pkg.get('b@1.1.0').should.eql({id: 'b@1.1.0'});
+
+    pkg.set({id: 'b@1.1.0', name: 'b'});
+    pkg.get('b@1.1.0').should.eql({id: 'b@1.1.0'});
+  });
+
+  it('getPackages method', function() {
+    var pkg = getPackage('normal');
+    var pkgs = pkg.getPackages();
+
+    var b = pkg.get('b@1.1.0');
+    pkgs['b@1.1.0'].should.equal(b);
+
+    Object.keys(b.getPackages()).should.eql([
+      'd@0.1.0',
+      'c@1.1.1',
+      'b@1.1.0',
+      'd@0.1.1'
+    ]);
+  });
+
+  describe('error', function() {
+
+    it('not found', function() {
+      (function() {
+        getPackage('not-found')._parse();
+      }).should.throw('b.js not found');
+    });
+
+    it('no matched version', function() {
+      (function() {
+        getPackage('unmatch-version')._parse();
+      }).should.throw('no matched version of a');
+    });
+
+    it('detect main type', function() {
+      (function() {
+        getPackage('main-type-error')._parse();
+      }).should.throw('pkg.spm.main should be string.');
+    });
+
+    it('detect output type', function() {
+      (function() {
+        getPackage('output-type-error')._parse();
+      }).should.throw('pkg.spm.output should be array.');
+    });
+
+    it('dir not specified', function() {
+      (function() {
+        new SpmPackage();
+      }).should.throw('miss the first argument');
+    });
+
+    it('no installed package but required', function() {
+      (function() {
+        getPackage('no-installed-package')._parse();
+      }).should.throw('b not found but required');
+    });
   });
 });
 

@@ -61,7 +61,9 @@ Example below
 ```
 {
   files: {
-    'index.js': ['each', './feature']
+    'index.js': {
+      dependencies: ['each', './feature']
+    }
   }
 }
 ```
