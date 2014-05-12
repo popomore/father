@@ -1,6 +1,5 @@
 {
   "name": "each",
-  "repo": "component/each",
   "description": "Array / object / string iteration utility",
   "version": "0.2.3",
   "keywords": [
@@ -17,5 +16,6 @@
   "development": {},
   "scripts": [
     "index.js"
-  ]
+  ],
+  "repository": "component/each"
 }

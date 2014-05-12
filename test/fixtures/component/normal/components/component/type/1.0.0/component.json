@@ -9,10 +9,12 @@
   ],
   "dependencies": {},
   "development": {
-    "component/assert": "*"
+    "dependencies": {
+      "component/assert": "*"
+    }
   },
   "scripts": [
     "index.js"
   ],
-  "repo": "https://raw.github.com/component/type"
+  "repository": "component/type"
 }
