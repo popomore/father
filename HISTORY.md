@@ -2,6 +2,10 @@
 
 ---
 
+## 0.6.2
+
+only father package will concat options.entry
+
 ## 0.6.1
 
 fix componentPackage and improve coverage
