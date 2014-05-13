@@ -2,6 +2,10 @@
 
 ---
 
+## 0.6.1
+
+fix componentPackage and improve coverage
+
 ## 0.6.0
 
 - option change: output -> entry
