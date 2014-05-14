@@ -191,6 +191,12 @@ describe('Father.SpmPackage', function() {
         getPackage('no-installed-package')._parse();
       }).should.throw('b not found but required');
     });
+
+    it('recursive', function() {
+      (function() {
+        getPackage('recursive')._parse();
+      }).should.throw('found index.js has recursive dependency');
+    });
   });
 });
 
