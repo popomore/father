@@ -2,6 +2,11 @@
 
 ---
 
+## 0.6.3
+
+- change order of parseFiles
+- throw when recursive dependency
+
 ## 0.6.2
 
 only father package will concat options.entry
