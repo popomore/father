@@ -59,7 +59,7 @@ describe('Father.SpmPackage', function() {
   it('output', function() {
     var pkg = getPackage('output');
     pkg.output.should.eql(['a.js', 'b.js']);
-    Object.keys(pkg.files).should.eql(['index.js','a1.js', 'a.js', 'b1.js', 'b.js']);
+    Object.keys(pkg.files).should.eql(['index.js','a.js', 'a1.js', 'b.js', 'b1.js']);
   });
 
   it('resolve deps', function() {
@@ -72,7 +72,7 @@ describe('Father.SpmPackage', function() {
 
   it('css', function() {
     var pkg = getPackage('css');
-    Object.keys(pkg.files).should.eql(['other.css', 'base.css', 'index.css']);
+    Object.keys(pkg.files).should.eql(['index.css', 'base.css', 'other.css']);
     pkg.files['index.css'].dependencies.should.eql(['./base.css', './other.css']);
     pkg.files['base.css'].dependencies.should.eql(['./other.css']);
     pkg.files['other.css'].dependencies.should.eql([]);
@@ -121,7 +121,7 @@ describe('Father.SpmPackage', function() {
     b.name.should.eql('b');
     b.version.should.eql('1.1.0');
     Object.keys(b.dependencies).should.eql(['d', 'c']);
-    Object.keys(b.files).should.eql(['src/b.tpl', 'src/b.js']);
+    Object.keys(b.files).should.eql(['src/b.js', 'src/b.tpl']);
 
     var self = pkg.get('a@1.0.0');
     self.should.equal(pkg);
