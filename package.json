@@ -1,6 +1,6 @@
 {
   "name": "father",
-  "version": "0.6.3",
+  "version": "0.6.4",
   "description": "A package parser that can resolve self and dependencies, supporting spm, component.",
   "main": "index",
   "dependencies": {
