@@ -154,6 +154,11 @@ describe('Father.SpmPackage', function() {
     ]);
   });
 
+  it('require other extension', function() {
+    var pkg = getPackage('require-other-ext');
+    pkg.files['index.js'].dependencies.should.eql(['./a.runtime']);
+  });
+
   describe('error', function() {
 
     it('not found', function() {
