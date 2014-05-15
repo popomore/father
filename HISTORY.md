@@ -2,6 +2,10 @@
 
 ---
 
+## 0.6.4
+
+require other extension
+
 ## 0.6.3
 
 - change order of parseFiles
