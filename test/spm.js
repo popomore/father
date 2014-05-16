@@ -92,6 +92,7 @@ describe('Father.SpmPackage', function() {
     var pkg = getPackage('pass-extradeps', {extraDeps: {handlebars: 'handlebars'}});
     var bPkg = pkg.dependencies.b;
     bPkg.files['index.js'].dependencies.should.eql(['./b.handlebars', 'handlebars']);
+    should.exists(pkg.dependencies.handlebars);
   });
 
   it('js require css', function() {
@@ -157,6 +158,7 @@ describe('Father.SpmPackage', function() {
   it('require other extension', function() {
     var pkg = getPackage('require-other-ext');
     pkg.files['index.js'].dependencies.should.eql(['./a.runtime']);
+    pkg.files['a.runtime.js'].dependencies.should.eql([]);
   });
 
   describe('error', function() {
