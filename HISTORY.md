@@ -2,6 +2,11 @@
 
 ---
 
+## 0.6.5
+
+1. test file exist first¬
+2. merge devDependencies and engines¬
+
 ## 0.6.4
 
 require other extension
