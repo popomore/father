@@ -4,8 +4,13 @@
   "spm": {
     "main": "a.js",
     "dependencies": {
-      "b": "1.1.0",
+      "b": "1.1.0"
+    },
+    "devDependencies": {
       "handlebars": "1.1.0"
+    },
+    "engines": {
+      "seajs": "2.2.0"
     }
   }
 }

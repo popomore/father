@@ -1,0 +1,7 @@
+{
+  "name": "seajs",
+  "version": "2.2.0",
+  "spm": {
+    "main": "sea.js"
+  }
+}
