@@ -163,6 +163,21 @@ Return
 }
 ```
 
+### ignore
+
+```
+// a.js
+require('b')
+```
+
+If you don't want to parse package b, you can specify ignore. And it won't parse the dependencies of b.
+
+```
+new Package('path/to/package', {
+  ignore: ['b']
+});
+```
+
 ## Custom
 
 If you want to use it for your package, you can extend Package and override readPackage.

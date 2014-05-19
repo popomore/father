@@ -205,6 +205,12 @@ describe('Father.SpmPackage', function() {
       }).should.throw('b not found but required');
     });
 
+    it('ignore package', function() {
+      var pkg = getPackage('no-installed-package', {ignore: ['b']});
+      pkg.files['index.js'].dependencies.should.eql(['b']);
+      pkg.dependencies.should.eql({});
+    });
+
     it('recursive', function() {
       (function() {
         getPackage('recursive')._parse();

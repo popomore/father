@@ -2,6 +2,10 @@
 
 ---
 
+## 0.6.9
+
+add ignore option, can ignore file or package
+
 ## 0.6.8
 
 only father package will concat option.entry and pkg.output
