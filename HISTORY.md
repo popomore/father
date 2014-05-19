@@ -2,9 +2,13 @@
 
 ---
 
-## 0.6.7
+## 0.6.8
 
 only father package will concat option.entry and pkg.output
+
+## 0.6.7
+
+should not throw when not specifing pkg.main
 
 ## 0.6.6
 
