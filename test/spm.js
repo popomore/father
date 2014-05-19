@@ -161,6 +161,11 @@ describe('Father.SpmPackage', function() {
     pkg.files['a.runtime.js'].dependencies.should.eql([]);
   });
 
+  it('should not throw when not specifing pkg.main', function() {
+    var pkg = getPackage('no-main');
+    pkg.files['a.js'].dependencies.should.eql([]);
+  });
+
   describe('error', function() {
 
     it('not found', function() {
