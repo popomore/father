@@ -105,6 +105,7 @@ describe('Father.SpmPackage', function() {
   it('other entry', function() {
     var pkg = getPackage('other-entry', {entry: ['a.js']});
     Object.keys(pkg.files).should.eql(['index.js', 'a.js', 'b.js']);
+    Object.keys(pkg.get('b@1.0.0').files).should.eql(['index.js']);
   });
 
   it('cascade dependency', function() {

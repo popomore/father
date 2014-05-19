@@ -2,6 +2,10 @@
 
 ---
 
+## 0.6.7
+
+only father package will concat option.entry and pkg.output
+
 ## 0.6.6
 
 test file exist first¬
