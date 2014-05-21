@@ -15,7 +15,7 @@ describe('Father.ComponentPackage', function() {
     pkg.main.should.eql('src/index.js');
     pkg.name.should.eql('test');
     pkg.version.should.eql('1.0.0');
-    pkg.files['src/index.js'].dependencies.should.eql(['each', './test', 'to-function']);
+    pkg.files['src/index.js'].dependencies.should.eql(['each', './test.js', 'to-function']);
     pkg.files['src/test.js'].dependencies.should.eql(['to-function']);
     var pkgDeps = pkg.dependencies;
     Object.keys(pkgDeps).should.eql(['each', 'to-function']);

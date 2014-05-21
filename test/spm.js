@@ -3,6 +3,7 @@
 var join = require('path').join;
 var father = require('..');
 var SpmPackage = father.SpmPackage;
+var util = require('../lib/util');
 var base = join(__dirname, 'fixtures/spm');
 var should = require('should');
 
@@ -16,7 +17,7 @@ describe('Father.SpmPackage', function() {
     pkg.main.should.eql('a.js');
     pkg.name.should.eql('a');
     pkg.version.should.eql('1.0.0');
-    pkg.files['a.js'].dependencies.should.eql(['b', './b', 'c', 'd', './a.json', './a.handlebars', 'handlebars']);
+    pkg.files['a.js'].dependencies.should.eql(['b', './b.js', 'd', './a.json', './a.handlebars', 'c', 'handlebars']);
     pkg.files['b.js'].dependencies.should.eql(['b', 'c']);
     pkgDeps['b'].should.eql(pkg.get('b@1.1.0'));
     pkgDeps['c'].should.eql(pkg.get('c@1.1.1'));
@@ -64,9 +65,9 @@ describe('Father.SpmPackage', function() {
 
   it('resolve deps', function() {
     var pkg = getPackage('resolve-deps');
-    pkg.files['src/c.js'].dependencies.should.eql(['../a', '../b', './d']);
+    pkg.files['src/c.js'].dependencies.should.eql(['../a.js', '../b.js', './d.js']);
     pkg.files['src/d.js'].dependencies.should.eql([]);
-    pkg.files['a.js'].dependencies.should.eql(['./b', './src/d']);
+    pkg.files['a.js'].dependencies.should.eql(['./b.js', './src/d.js']);
     pkg.files['b.js'].dependencies.should.eql([]);
   });
 
@@ -158,8 +159,10 @@ describe('Father.SpmPackage', function() {
 
   it('require other extension', function() {
     var pkg = getPackage('require-other-ext');
-    pkg.files['index.js'].dependencies.should.eql(['./a.runtime']);
+    pkg.files['index.js'].dependencies.should.eql(['./a.runtime.js', './jquery.plugin.js', './b.ext']);
     pkg.files['a.runtime.js'].dependencies.should.eql([]);
+    pkg.files['b.ext'].dependencies.should.eql([]);
+    pkg.files['jquery.plugin.js'].dependencies.should.eql([]);
   });
 
   it('should not throw when not specifing pkg.main', function() {
@@ -169,10 +172,18 @@ describe('Father.SpmPackage', function() {
 
   describe('error', function() {
 
-    it('not found', function() {
+    it('not found ./b', function() {
+      var file = join(base, 'not-found/b.js');
       (function() {
         getPackage('not-found')._parse();
-      }).should.throw('b.js not found');
+      }).should.throw(util.winPath(file) + ' not found');
+    });
+
+    it('not found ./b.js', function() {
+      var file = join(base, 'not-found2/b.js');
+      (function() {
+        getPackage('not-found2')._parse();
+      }).should.throw(util.winPath(file) + ' not found');
     });
 
     it('no matched version', function() {
