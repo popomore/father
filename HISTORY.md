@@ -2,6 +2,10 @@
 
 ---
 
+## 0.6.10
+
+fix windows path
+
 ## 0.6.9
 
 add ignore option, can ignore file or package
