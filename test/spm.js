@@ -176,14 +176,14 @@ describe('Father.SpmPackage', function() {
       var file = join(base, 'not-found/b.js');
       (function() {
         getPackage('not-found')._parse();
-      }).should.throw(util.winPath(file) + ' not found');
+      }).should.throw(file + ' not found');
     });
 
     it('not found ./b.js', function() {
       var file = join(base, 'not-found2/b.js');
       (function() {
         getPackage('not-found2')._parse();
-      }).should.throw(util.winPath(file) + ' not found');
+      }).should.throw(file + ' not found');
     });
 
     it('no matched version', function() {
