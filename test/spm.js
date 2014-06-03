@@ -3,7 +3,6 @@
 var join = require('path').join;
 var father = require('..');
 var SpmPackage = father.SpmPackage;
-var util = require('../lib/util');
 var base = join(__dirname, 'fixtures/spm');
 var should = require('should');
 
@@ -170,10 +169,16 @@ describe('Father.SpmPackage', function() {
     pkg.files['a.js'].dependencies.should.eql([]);
   });
 
+  it('should require directory', function() {
+    var pkg = getPackage('require-directory');
+    pkg.files['lib/index.js'].dependencies.should.eql([]);
+    pkg.files['index.js'].dependencies.should.eql(['./lib/index.js']);
+  });
+
   describe('error', function() {
 
     it('not found ./b', function() {
-      var file = join(base, 'not-found/b.js');
+      var file = join(base, 'not-found/b');
       (function() {
         getPackage('not-found')._parse();
       }).should.throw(file + ' not found');
