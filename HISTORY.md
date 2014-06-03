@@ -2,6 +2,14 @@
 
 ---
 
+## 0.6.12
+
+support require directory
+
+## 0.6.11
+
+update npmignore
+
 ## 0.6.10
 
 fix windows path
