@@ -2,6 +2,10 @@
 
 ---
 
+## 0.6.13
+
+hanlde relative file path in spm.main
+
 ## 0.6.12
 
 support require directory

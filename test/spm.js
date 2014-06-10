@@ -175,6 +175,12 @@ describe('Father.SpmPackage', function() {
     pkg.files['index.js'].dependencies.should.eql(['./lib/index.js']);
   });
 
+  it('should support relative main', function() {
+    var pkg = getPackage('relative-main');
+    Object.keys(pkg.files).length.should.eql(1);
+    pkg.files['index.js'].dependencies.should.eql([]);
+  });
+
   describe('error', function() {
 
     it('not found ./b', function() {
