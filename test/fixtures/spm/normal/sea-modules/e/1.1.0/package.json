@@ -1,0 +1,10 @@
+{
+  "name": "e",
+  "version": "1.1.0",
+  "spm": {
+    "main": "src/e.js",
+    "devDependencies": {
+      "f": "0.1.0"
+    }
+  }
+}

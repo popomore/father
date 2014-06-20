@@ -13,6 +13,7 @@ describe('Father.SpmPackage', function() {
     pkg.output.should.eql(['c.js']);
     should.exists(pkg.files['c.js']);
     var pkgDeps = pkg.dependencies;
+    var pkgDevDeps = pkg.devDependencies;
     pkg.main.should.eql('a.js');
     pkg.name.should.eql('a');
     pkg.version.should.eql('1.0.0');
@@ -21,6 +22,7 @@ describe('Father.SpmPackage', function() {
     pkgDeps['b'].should.eql(pkg.get('b@1.1.0'));
     pkgDeps['c'].should.eql(pkg.get('c@1.1.1'));
     pkgDeps['d'].should.eql(pkg.get('d@0.1.1'));
+    pkgDevDeps['e'].should.eql(pkg.get('e@1.1.0'));
 
     var b = pkg.get('b@1.1.0');
     var bDeps = b.dependencies;
@@ -48,6 +50,12 @@ describe('Father.SpmPackage', function() {
     d2.name.should.eql('d');
     d2.version.should.eql('0.1.1');
     d2.files['index.js'].dependencies.should.eql([]);
+
+    var e = pkg.get('e@1.1.0');
+    e.main.should.eql('src/e.js');
+    e.name.should.eql('e');
+    e.version.should.eql('1.1.0');
+    e.files['src/e.js'].dependencies.should.eql([]);
   });
 
   it('version cache', function() {
@@ -152,7 +160,8 @@ describe('Father.SpmPackage', function() {
       'd@0.1.0',
       'c@1.1.1',
       'b@1.1.0',
-      'd@0.1.1'
+      'd@0.1.1',
+      'e@1.1.0'
     ]);
   });
 
