@@ -13,6 +13,7 @@ describe('Father.SpmPackage', function() {
     pkg.output.should.eql(['c.js']);
     should.exists(pkg.files['c.js']);
     var pkgDeps = pkg.dependencies;
+    var pkgDevDeps = pkg.devDependencies;
     pkg.main.should.eql('a.js');
     pkg.name.should.eql('a');
     pkg.version.should.eql('1.0.0');
@@ -21,7 +22,7 @@ describe('Father.SpmPackage', function() {
     pkgDeps['b'].should.eql(pkg.get('b@1.1.0'));
     pkgDeps['c'].should.eql(pkg.get('c@1.1.1'));
     pkgDeps['d'].should.eql(pkg.get('d@0.1.1'));
-    pkgDeps['e'].should.eql(pkg.get('e@1.1.0'));
+    pkgDevDeps['e'].should.eql(pkg.get('e@1.1.0'));
 
     var b = pkg.get('b@1.1.0');
     var bDeps = b.dependencies;
