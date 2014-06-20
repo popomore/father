@@ -190,6 +190,12 @@ describe('Father.SpmPackage', function() {
     pkg.files['index.js'].dependencies.should.eql([]);
   });
 
+  it('should support no extension main', function() {
+    var pkg = getPackage('no-ext-main');
+    Object.keys(pkg.files).length.should.eql(1);
+    pkg.files['index.js'].dependencies.should.eql([]);
+  });
+
   describe('error', function() {
 
     it('not found ./b', function() {
