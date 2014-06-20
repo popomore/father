@@ -55,6 +55,7 @@ describe('Father.SpmPackage', function() {
     e.main.should.eql('src/e.js');
     e.name.should.eql('e');
     e.version.should.eql('1.1.0');
+    Object.keys(e.dependencies).should.eql([]);
     e.files['src/e.js'].dependencies.should.eql([]);
   });
 
