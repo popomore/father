@@ -2,6 +2,11 @@
 
 ---
 
+## 0.6.14
+
+- add devDependencies property
+- handle none extension path in spm.main
+
 ## 0.6.13
 
 hanlde relative file path in spm.main
