@@ -243,9 +243,9 @@ describe('Father.SpmPackage', function() {
       }).should.throw('b not found but required');
     });
 
-    it('ignore package', function() {
-      var pkg = getPackage('no-installed-package', {ignore: ['b']});
-      pkg.files['index.js'].dependencies.should.eql(['b']);
+    it('skip package', function() {
+      var pkg = getPackage('no-installed-package', {skip: ['b', './a']});
+      pkg.files['index.js'].dependencies.should.eql([]);
       pkg.dependencies.should.eql({});
     });
 

@@ -163,18 +163,26 @@ Return
 }
 ```
 
-### ignore
+### skip
 
 ```
 // a.js
 require('b')
 ```
 
-If you don't want to parse package b, you can specify ignore. And it won't parse the dependencies of b.
+If you want to skip file or package, you can specify skip. And it won't parse b and won't exist in dependencies.
 
 ```
 new Package('path/to/package', {
-  ignore: ['b']
+  skip: ['b']
+});
+```
+
+yield
+
+```
+define('a', [], function(require) {
+  require('b')
 });
 ```
 

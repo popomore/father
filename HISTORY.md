@@ -2,6 +2,10 @@
 
 ---
 
+## 0.7.0
+
+**Change** option: ignore -> skip
+
 ## 0.6.14
 
 - add devDependencies property
