@@ -70,6 +70,12 @@ describe('Father.SpmPackage', function() {
     Object.keys(pkg.files).should.eql(['index.js','a.js', 'a1.js', 'b.js', 'b1.js', 'glob/c.js', 'c1.js']);
   });
 
+  it('output glob duplicate', function() {
+    var pkg = getPackage('output-glob-duplicate');
+    pkg.output.should.eql(['a.js', './*.js']);
+    Object.keys(pkg.files).should.eql(['a.js']);
+  });
+
   it('resolve deps', function() {
     var pkg = getPackage('resolve-deps');
     pkg.files['src/c.js'].dependencies.should.eql(['../a.js', '../b.js', './d.js']);
