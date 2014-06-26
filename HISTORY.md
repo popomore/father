@@ -2,6 +2,10 @@
 
 ---
 
+## 0.7.1
+
+output support glob
+
 ## 0.7.0
 
 **Change** option: ignore -> skip
