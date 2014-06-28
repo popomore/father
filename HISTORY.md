@@ -2,6 +2,10 @@
 
 ---
 
+## 0.7.2
+
+searequire instead of requires
+
 ## 0.7.1
 
 output support glob
