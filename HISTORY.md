@@ -2,6 +2,10 @@
 
 ---
 
+## 0.7.3
+
+upgrade searequire@1.3.0
+
 ## 0.7.2
 
 searequire instead of requires
