@@ -2,6 +2,10 @@
 
 ---
 
+## 1.0.0
+
+- move extraDeps to transport
+
 ## 0.7.3
 
 upgrade searequire@1.3.0
