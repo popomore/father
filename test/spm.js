@@ -203,6 +203,17 @@ describe('Father.SpmPackage', function() {
     pkg.files['index.js'].dependencies.should.eql([]);
   });
 
+  it('skip package', function() {
+    var pkg = getPackage('normal', {skip: ['b', './b.js']});
+    pkg.files['a.js'].dependencies.should.eql(['d', './a.json', './a.handlebars']);
+    Object.keys(pkg.files).should.eql(['a.js', 'a.json', 'a.handlebars', 'c.js']);
+  });
+
+  it('ignore package', function() {
+    var pkg = getPackage('no-installed-package', {ignore: ['b']});
+    pkg.files['index.js'].dependencies.should.eql(['b', './a.js']);
+  });
+
   describe('error', function() {
 
     it('not found ./b', function() {
@@ -247,12 +258,6 @@ describe('Father.SpmPackage', function() {
       (function() {
         getPackage('no-installed-package')._parse();
       }).should.throw('b not found but required');
-    });
-
-    it('skip package', function() {
-      var pkg = getPackage('no-installed-package', {skip: ['b', './a']});
-      pkg.files['index.js'].dependencies.should.eql([]);
-      pkg.dependencies.should.eql({});
     });
 
     it('recursive', function() {
