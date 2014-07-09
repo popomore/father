@@ -214,6 +214,72 @@ describe('Father.SpmPackage', function() {
     pkg.files['index.js'].dependencies.should.eql(['b', './a.js']);
   });
 
+  it('lookup files', function() {
+    var pkg = getPackage('normal');
+
+    // all deps
+    var ret1 = pkg.files['a.js'].lookup(function(filepath, pkg) {
+      return [pkg.name, pkg.version, filepath].join('/');
+    });
+    ret1.should.eql([
+      'b/1.1.0/src/b.js',
+      'c/1.1.1/index.js',
+      'd/0.1.0/index.js',
+      'b/1.1.0/src/b.tpl',
+      'a/1.0.0/b.js',
+      'd/0.1.1/index.js',
+      'a/1.0.0/a.json',
+      'a/1.0.0/a.handlebars'
+    ]);
+
+    // relative deps
+    var ret2 = pkg.files['a.js'].lookup(function(filepath, pkg_) {
+      return pkg.name === pkg_.name ?
+        [pkg_.name, pkg_.version, filepath].join('/') :
+        [pkg_.name, pkg_.version, pkg_.main].join('/');
+    });
+    ret2.should.eql([
+      'b/1.1.0/src/b.js',
+      'c/1.1.1/index.js',
+      'd/0.1.0/index.js',
+      'a/1.0.0/b.js',
+      'd/0.1.1/index.js',
+      'a/1.0.0/a.json',
+      'a/1.0.0/a.handlebars'
+    ]);
+
+    // isRelative
+    var ret3 = pkg.files['a.js'].lookup(function(filepath, pkg, isRelative) {
+      if (isRelative) return false;
+      return [pkg.name, pkg.version, filepath].join('/');
+    });
+    ret3.should.eql([
+      'b/1.1.0/src/b.js',
+      'c/1.1.1/index.js',
+      'd/0.1.0/index.js',
+      'd/0.1.1/index.js'
+    ]);
+
+    // filter
+    var ret4 = pkg.files['a.js'].lookup(function(filepath, pkg) {
+      switch(pkg.name) {
+        case 'b':
+          return;
+        case 'c':
+          return null;
+        case 'd':
+          return '';
+        default:
+          return [pkg.name, pkg.version, filepath].join('/');
+      }
+    });
+    ret4.should.eql([
+      'a/1.0.0/b.js',
+      'a/1.0.0/a.json',
+      'a/1.0.0/a.handlebars'
+    ]);
+  });
+
   describe('error', function() {
 
     it('not found ./b', function() {

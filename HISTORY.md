@@ -5,6 +5,7 @@
 ## 1.0.0
 
 - move extraDeps to transport
+- file has lookup method to transform all dependencies of file
 
 ## 0.7.3
 
