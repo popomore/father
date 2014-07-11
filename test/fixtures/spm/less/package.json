@@ -1,0 +1,11 @@
+{
+  "name": "a",
+  "version": "1.0.0",
+  "spm": {
+    "main": "a.less",
+    "dependencies": {
+      "d": "1.0.0",
+      "e": "1.0.0"
+    }
+  }
+}
