@@ -2,6 +2,10 @@
 
 ---
 
+## 0.8.1
+
+extra argument to lookup
+
 ## 0.8.0
 
 - move extraDeps to transport
