@@ -1,5 +1,5 @@
 require('b');
-require('./b.js');
+require.async('./b.js');
 require('d');
 require('./a.json');
 require('./a.handlebars');

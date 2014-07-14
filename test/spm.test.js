@@ -191,6 +191,13 @@ describe('Father.SpmPackage', function() {
     pkg.files['index.js'].dependencies.should.eql(['./lib/index.js']);
   });
 
+  it('should require file first', function() {
+    var pkg = getPackage('require-file-first');
+    Object.keys(pkg.files).should.eql(['index.js', 'lib.js']);
+    pkg.files['lib.js'].dependencies.should.eql([]);
+    pkg.files['index.js'].dependencies.should.eql(['./lib.js']);
+  });
+
   it('should support relative main', function() {
     var pkg = getPackage('relative-main');
     Object.keys(pkg.files).length.should.eql(1);

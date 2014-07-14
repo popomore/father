@@ -2,6 +2,10 @@
 
 ---
 
+## 0.8.2
+
+upgrade searequire@1.5.0
+
 ## 0.8.1
 
 extra argument to lookup
