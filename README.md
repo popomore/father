@@ -102,20 +102,6 @@ The options when instantiation
 new Package('path/to/package', options);
 ```
 
-### extraDeps
-
-Config an extension as key, when that extension is found, value will be added to deps
-
-```
-new Package('path/to/package', {
-  extraDeps: {
-    'handlebars': 'handlebars'
-  }
-});
-```
-
-If one file `require('./xx.handlebars')`, handlebars will be added to the dependencies `['./xx.handlebars', 'handlebars']`
-
 ### entry
 
 Generally, files will be parsed from pkg.main, no dependent file will not be included. `entry` will be another entry point.
@@ -184,6 +170,43 @@ yield
 define('a', [], function(require) {
   require('b')
 });
+```
+
+### ignore
+
+Almost same as skip, however it will exist in dependency.
+
+## File object
+
+what you get in pkg.files is file objects
+
+```
+var fileObj = pkg.files['a.js'];
+```
+
+### lookup
+
+lookup all dependencies and can be filtered or transformed in callback
+
+```
+fileObj.lookup(function(fileInfo) {
+  // fileInfo.filepath: filepath in package
+  // fileInfo.pkg: package info
+  // fileInfo.isRelative: required by file in the same package
+  // fileInfo.dependent: dependent package
+  // fileInfo.extension: exntesion of the file
+  return fileInfo.filepath;
+
+  return false; // ignore
+});
+```
+
+### hasExt
+
+Determine whether it has the matched extension in all dependencies.
+
+```
+fileObj.hasExt('css'); // return false
 ```
 
 ## Custom

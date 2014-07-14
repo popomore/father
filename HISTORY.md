@@ -2,10 +2,10 @@
 
 ---
 
-## 1.0.0
+## 0.8.0
 
 - move extraDeps to transport
-- file has lookup method to transform all dependencies of file
+- add file object that can lookup all dependencies
 
 ## 0.7.3
 
