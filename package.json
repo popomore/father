@@ -15,7 +15,8 @@
     "coveralls": "~2.8.0",
     "istanbul": "~0.2.6",
     "mocha": "~1.17.1",
-    "should": "~4.0.4"
+    "should": "~4.0.4",
+    "totoro": "1"
   },
   "repository": {
     "type": "git",

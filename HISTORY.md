@@ -2,6 +2,10 @@
 
 ---
 
+## 0.8.4
+
+for windows test
+
 ## 0.8.3
 
 dependencies can be set

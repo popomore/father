@@ -8,4 +8,7 @@ coveralls: test
 debug:
 	node $(NODE_DEBUG) ./node_modules/.bin/_mocha -R spec -t 20000
 
+totoro:
+	./node_modules/.bin/totoro --runner test/spm.test.js -b "windows7/node/0.10,linux/node/0.10"
+
 .PHONY: test
