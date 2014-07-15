@@ -221,6 +221,20 @@ describe('Father.SpmPackage', function() {
     pkg.files['index.js'].dependencies.should.eql(['b', './a.js']);
   });
 
+  it('set dependencies', function() {
+    var pkg = getPackage('set-deps');
+    var pkgB = pkg.dependencies['b'];
+    pkgB.main = 'index.js'; // useless
+    pkgB.dependencies = {
+      'import-style': pkg.dependencies['import-style'],
+      'no-exist': {name: 'a'}
+    };
+    should.exists(pkgB.dependencies['import-style']);
+    pkgB.dependencies['import-style'].should.equal(pkg.get('import-style@1.0.0'));
+
+    should.not.exists(pkgB.dependencies['no-exist']);
+  });
+
   describe('error', function() {
 
     it('not found ./b', function() {

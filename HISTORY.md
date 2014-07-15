@@ -2,6 +2,10 @@
 
 ---
 
+## 0.8.3
+
+dependencies can be set
+
 ## 0.8.2
 
 upgrade searequire@1.5.0
