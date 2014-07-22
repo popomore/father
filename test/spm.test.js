@@ -77,6 +77,22 @@ describe('Father.SpmPackage', function() {
     Object.keys(pkg.files).should.eql(['a.js']);
   });
 
+  it('other entry', function() {
+    var pkg = getPackage('other-entry', {entry: ['a.js']});
+    Object.keys(pkg.files).should.eql(['index.js', 'a.js', 'b.js']);
+
+    var pkgB = pkg.get('b@1.0.0');
+    Object.keys(pkgB.files).should.eql(['index.js', 'a.js']);
+  });
+
+  it('other entry with glob', function() {
+    var pkg = getPackage('other-entry', {entry: ['./glob/*.js']});
+    Object.keys(pkg.files).should.eql(['index.js', 'glob/c.js', 'b.js']);
+
+    var pkgB = pkg.get('b@1.0.0');
+    Object.keys(pkgB.files).should.eql(['index.js', 'a.js']);
+  });
+
   it('resolve deps', function() {
     var pkg = getPackage('resolve-deps');
     pkg.files['src/c.js'].dependencies.should.eql(['../a.js']);
@@ -115,12 +131,6 @@ describe('Father.SpmPackage', function() {
     pkg.files['index.js'].dependencies.should.eql(['./a.css']);
     pkg.files['a.css'].dependencies.should.eql(['./b.css']);
     pkg.files['b.css'].dependencies.should.eql([]);
-  });
-
-  it('other entry', function() {
-    var pkg = getPackage('other-entry', {entry: ['a.js']});
-    Object.keys(pkg.files).should.eql(['index.js', 'a.js', 'b.js']);
-    Object.keys(pkg.get('b@1.0.0').files).should.eql(['index.js']);
   });
 
   it('cascade dependency', function() {

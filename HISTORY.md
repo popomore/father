@@ -2,6 +2,10 @@
 
 ---
 
+## 0.8.5
+
+parse entry from pkg.output in the package of the dependencies
+
 ## 0.8.4
 
 for windows test
