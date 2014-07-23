@@ -2,6 +2,10 @@
 
 ---
 
+## 0.8.6
+
+give fileInfo ignore option when lookup
+
 ## 0.8.5
 
 parse entry from pkg.output in the package of the dependencies

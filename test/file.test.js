@@ -145,6 +145,13 @@ describe('Father.File', function() {
     }
   });
 
+  it('ignore package', function() {
+    var pkg = getPackage('no-installed-package', {ignore: ['b']});
+    pkg.files['index.js'].lookup(function(fileInfo) {
+      return fileInfo.ignore ? fileInfo.pkg.name : false;
+    }).should.eql(['b']);
+  });
+
 });
 
 function getPackage(name, options) {
