@@ -245,6 +245,11 @@ describe('Father.SpmPackage', function() {
     should.not.exists(pkgB.dependencies['no-exist']);
   });
 
+  it('moduleDir', function() {
+    var pkg = getPackage('module-dir', {moduleDir: 'spm-modules'});
+    pkg.files[pkg.main].dependencies.should.eql(['b']);
+  });
+
   describe('error', function() {
 
     it('not found ./b', function() {

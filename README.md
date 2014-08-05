@@ -176,6 +176,10 @@ define('a', [], function(require) {
 
 Almost same as skip, however it will exist in dependency.
 
+### moduleDir
+
+Where is your modules
+
 ## File object
 
 what you get in pkg.files is file objects

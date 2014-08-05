@@ -2,6 +2,10 @@
 
 ---
 
+## 0.8.7
+
+option moduleDir
+
 ## 0.8.6
 
 give fileInfo ignore option when lookup
