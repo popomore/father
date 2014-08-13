@@ -2,11 +2,16 @@
 
 var join = require('path').join;
 var father = require('..');
+var File = require('../lib/file');
 var SpmPackage = father.SpmPackage;
 var base = join(__dirname, 'fixtures/spm');
 var should = require('should');
 
 describe('Father.SpmPackage', function() {
+
+  beforeEach(function() {
+    File.cache = {};
+  });
 
   it('normal', function() {
     var pkg = getPackage('normal');
@@ -259,15 +264,24 @@ describe('Father.SpmPackage', function() {
       'b/lib/b.js'
     ]);
     var deps = pkg.files['index.js']._dependencies;
-    deps.length.should.eql(4);
-    deps[0].pkg.name.should.eql('b');
-    deps[0].path.should.eql('index.js');
-    deps[1].pkg.name.should.eql('b');
-    deps[1].path.should.eql('a.js');
-    deps[2].pkg.name.should.eql('b');
-    deps[2].path.should.eql('lib/index.js');
-    deps[3].pkg.name.should.eql('b');
-    deps[3].path.should.eql('lib/b.js');
+    Object.keys(deps).length.should.eql(4);
+    deps['b'].pkg.name.should.eql('b');
+    deps['b'].path.should.eql('index.js');
+    deps['b/a'].pkg.name.should.eql('b');
+    deps['b/a'].path.should.eql('a.js');
+    deps['b/lib'].pkg.name.should.eql('b');
+    deps['b/lib'].path.should.eql('lib/index.js');
+    deps['b/lib/b.js'].pkg.name.should.eql('b');
+    deps['b/lib/b.js'].path.should.eql('lib/b.js');
+
+    var pkgB = pkg.get('b@1.0.0');
+    pkgB.files['lib/b.js'].dependencies.should.eql(['c/c.js']);
+    should.exist(pkgB.files['a.js']);
+    should.exist(pkgB.files['lib/b.js']);
+    should.exist(pkgB.files['lib/index.js']);
+
+    var pkgC = pkg.get('c@1.0.0');
+    should.exist(pkgC.files['c.js']);
   });
 
   it('unknown name', function() {

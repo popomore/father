@@ -4,7 +4,7 @@ var join = require('path').join;
 var father = require('..');
 var SpmPackage = father.SpmPackage;
 var base = join(__dirname, 'fixtures/spm');
-require('should');
+var should = require('should');
 
 describe('Father.File', function() {
   var pkg = getPackage('normal');
@@ -133,6 +133,20 @@ describe('Father.File', function() {
     file.hasExt('json').should.be.true;
     file.hasExt('handlebars').should.be.true;
     file.hasExt('css').should.be.false;
+  });
+
+  it('file add exist deps', function() {
+    var file = pkg.files['a.js'];
+    should.exist(file._dependencies['./b.js']);
+    file.addDeps('./b.js', null);
+    should.exist(file._dependencies['./b.js']);
+  });
+
+  it('file getDeps', function() {
+    var file = pkg.files['a.js'];
+    var fileB = file.getDeps('b');
+    fileB.pkg.name.should.eql('b');
+    fileB.path.should.eql('src/b.js');
   });
 
   it('file hasExt filter', function() {
