@@ -250,9 +250,30 @@ describe('Father.SpmPackage', function() {
     pkg.files[pkg.main].dependencies.should.eql(['b']);
   });
 
-  it.skip('require file in package', function() {
+  it('require file in package', function() {
     var pkg = getPackage('file-in-package');
-    pkg.files['index.js'].dependencies.should.eql([]);
+    pkg.files['index.js'].dependencies.should.eql([
+      'b',
+      'b/a.js',
+      'b/lib/index.js',
+      'b/lib/b.js'
+    ]);
+    var deps = pkg.files['index.js']._dependencies;
+    deps.length.should.eql(4);
+    deps[0].pkg.name.should.eql('b');
+    deps[0].filepath.should.eql('index.js');
+    deps[1].pkg.name.should.eql('b');
+    deps[1].filepath.should.eql('a.js');
+    deps[2].pkg.name.should.eql('b');
+    deps[2].filepath.should.eql('lib/index.js');
+    deps[3].pkg.name.should.eql('b');
+    deps[3].filepath.should.eql('lib/b.js');
+  });
+
+  it('unknown name', function() {
+    (function() {
+      getPackage('unknown-name')._parse();
+    }).should.throw('unknown name /a');
   });
 
   describe('error', function() {
