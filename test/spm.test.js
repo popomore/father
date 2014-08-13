@@ -261,13 +261,13 @@ describe('Father.SpmPackage', function() {
     var deps = pkg.files['index.js']._dependencies;
     deps.length.should.eql(4);
     deps[0].pkg.name.should.eql('b');
-    deps[0].filepath.should.eql('index.js');
+    deps[0].path.should.eql('index.js');
     deps[1].pkg.name.should.eql('b');
-    deps[1].filepath.should.eql('a.js');
+    deps[1].path.should.eql('a.js');
     deps[2].pkg.name.should.eql('b');
-    deps[2].filepath.should.eql('lib/index.js');
+    deps[2].path.should.eql('lib/index.js');
     deps[3].pkg.name.should.eql('b');
-    deps[3].filepath.should.eql('lib/b.js');
+    deps[3].path.should.eql('lib/b.js');
   });
 
   it('unknown name', function() {
