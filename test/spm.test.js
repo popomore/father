@@ -2,11 +2,16 @@
 
 var join = require('path').join;
 var father = require('..');
+var File = require('../lib/file');
 var SpmPackage = father.SpmPackage;
 var base = join(__dirname, 'fixtures/spm');
 var should = require('should');
 
 describe('Father.SpmPackage', function() {
+
+  beforeEach(function() {
+    File.cache = {};
+  });
 
   it('normal', function() {
     var pkg = getPackage('normal');
@@ -154,7 +159,7 @@ describe('Father.SpmPackage', function() {
     self.should.equal(pkg);
   });
 
-  it('set method', function() {
+  xit('set method', function() {
     var pkg = getPackage('normal');
     pkg.set({id: 'b@1.1.0'});
     pkg.get('b@1.1.0').should.eql({id: 'b@1.1.0'});
@@ -250,20 +255,53 @@ describe('Father.SpmPackage', function() {
     pkg.files[pkg.main].dependencies.should.eql(['b']);
   });
 
+  it('require file in package', function() {
+    var pkg = getPackage('file-in-package');
+    pkg.files['index.js'].dependencies.should.eql([
+      'b',
+      'b/a.js',
+      'b/lib/index.js',
+      'b/lib/b.js'
+    ]);
+    var deps = pkg.files['index.js']._dependencies;
+    Object.keys(deps).length.should.eql(4);
+    deps['b'].pkg.name.should.eql('b');
+    deps['b'].path.should.eql('index.js');
+    deps['b/a'].pkg.name.should.eql('b');
+    deps['b/a'].path.should.eql('a.js');
+    deps['b/lib'].pkg.name.should.eql('b');
+    deps['b/lib'].path.should.eql('lib/index.js');
+    deps['b/lib/b.js'].pkg.name.should.eql('b');
+    deps['b/lib/b.js'].path.should.eql('lib/b.js');
+
+    var pkgB = pkg.get('b@1.0.0');
+    pkgB.files['lib/b.js'].dependencies.should.eql(['c/c.js']);
+    should.exist(pkgB.files['a.js']);
+    should.exist(pkgB.files['lib/b.js']);
+    should.exist(pkgB.files['lib/index.js']);
+
+    var pkgC = pkg.get('c@1.0.0');
+    should.exist(pkgC.files['c.js']);
+  });
+
+  it('unknown name', function() {
+    (function() {
+      getPackage('unknown-name')._parse();
+    }).should.throw('unknown name /a in test/fixtures/spm/unknown-name/index.js');
+  });
+
   describe('error', function() {
 
     it('not found ./b', function() {
-      var file = join(base, 'not-found/b');
       (function() {
         getPackage('not-found')._parse();
-      }).should.throw(file + ' not found');
+      }).should.throw('test/fixtures/spm/not-found/b not found in test/fixtures/spm/not-found/index.js');
     });
 
     it('not found ./b.js', function() {
-      var file = join(base, 'not-found2/b.js');
       (function() {
         getPackage('not-found2')._parse();
-      }).should.throw(file + ' not found');
+      }).should.throw('test/fixtures/spm/not-found2/b.js not found in test/fixtures/spm/not-found2/index.js');
     });
 
     it('no matched version', function() {
@@ -293,13 +331,13 @@ describe('Father.SpmPackage', function() {
     it('no installed package but required', function() {
       (function() {
         getPackage('no-installed-package')._parse();
-      }).should.throw('b not found but required');
+      }).should.throw('b not found but required in test/fixtures/spm/no-installed-package/index.js');
     });
 
     it('recursive', function() {
       (function() {
         getPackage('recursive')._parse();
-      }).should.throw('found index.js has recursive dependency');
+      }).should.throw('found test/fixtures/spm/recursive/index.js has recursive dependency');
     });
   });
 });

@@ -4,7 +4,7 @@ var join = require('path').join;
 var father = require('..');
 var SpmPackage = father.SpmPackage;
 var base = join(__dirname, 'fixtures/spm');
-require('should');
+var should = require('should');
 
 describe('Father.File', function() {
   var pkg = getPackage('normal');
@@ -12,7 +12,7 @@ describe('Father.File', function() {
   it('lookup all deps', function() {
     var ret = pkg.files['a.js'].lookup(function(fileInfo) {
       var pkg = fileInfo.pkg;
-      return [pkg.name, pkg.version, fileInfo.filepath].join('/');
+      return [pkg.name, pkg.version, fileInfo.path].join('/');
     });
     ret.should.eql([
       'b/1.1.0/src/b.js',
@@ -30,7 +30,7 @@ describe('Father.File', function() {
     var ret = pkg.files['a.js'].lookup(function(fileInfo) {
       var pkg_ = fileInfo.pkg;
       return pkg.name === pkg_.name ?
-        [pkg_.name, pkg_.version, fileInfo.filepath].join('/') :
+        [pkg_.name, pkg_.version, fileInfo.path].join('/') :
         [pkg_.name, pkg_.version, pkg_.main].join('/');
     });
     ret.should.eql([
@@ -48,7 +48,7 @@ describe('Father.File', function() {
     var ret = pkg.files['a.js'].lookup(function(fileInfo) {
       if (fileInfo.isRelative) return false;
       var pkg = fileInfo.pkg;
-      return [pkg.name, pkg.version, fileInfo.filepath].join('/');
+      return [pkg.name, pkg.version, fileInfo.path].join('/');
     });
     ret.should.eql([
       'b/1.1.0/src/b.js',
@@ -61,9 +61,9 @@ describe('Father.File', function() {
   it('file dependent', function() {
     var ret = pkg.files['a.js'].lookup(function(fileInfo) {
       var pkg = fileInfo.pkg, dependent = fileInfo.dependent;
-      return [dependent.pkg.name, dependent.pkg.version, dependent.filepath].join('/') +
+      return [dependent.pkg.name, dependent.pkg.version, dependent.path].join('/') +
         ' -> ' +
-        [pkg.name, pkg.version, fileInfo.filepath].join('/');
+        [pkg.name, pkg.version, fileInfo.path].join('/');
     });
     ret.should.eql([
       'a/1.0.0/a.js -> b/1.1.0/src/b.js',
@@ -90,7 +90,7 @@ describe('Father.File', function() {
         case 'd':
           return '';
         default:
-          return [pkg.name, pkg.version, fileInfo.filepath].join('/');
+          return [pkg.name, pkg.version, fileInfo.path].join('/');
       }
     });
     ret.should.eql([
@@ -102,7 +102,7 @@ describe('Father.File', function() {
 
   it('lookup extra', function() {
     var extra = [{
-      filepath: 'index.js',
+      path: 'index.js',
       pkg: {
         name: 'extra',
         version: '1.0.0'
@@ -110,7 +110,7 @@ describe('Father.File', function() {
     }];
     var ret = pkg.files['a.js'].lookup(function(fileInfo) {
       var pkg = fileInfo.pkg;
-      return [pkg.name, pkg.version, fileInfo.filepath].join('/');
+      return [pkg.name, pkg.version, fileInfo.path].join('/');
     }, extra);
     ret.should.eql([
       'b/1.1.0/src/b.js',
@@ -133,6 +133,20 @@ describe('Father.File', function() {
     file.hasExt('json').should.be.true;
     file.hasExt('handlebars').should.be.true;
     file.hasExt('css').should.be.false;
+  });
+
+  it('file add exist deps', function() {
+    var file = pkg.files['a.js'];
+    should.exist(file._dependencies['./b.js']);
+    file.addDeps('./b.js', null);
+    should.exist(file._dependencies['./b.js']);
+  });
+
+  it('file getDeps', function() {
+    var file = pkg.files['a.js'];
+    var fileB = file.getDeps('b');
+    fileB.pkg.name.should.eql('b');
+    fileB.path.should.eql('src/b.js');
   });
 
   it('file hasExt filter', function() {
