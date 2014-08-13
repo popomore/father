@@ -287,23 +287,21 @@ describe('Father.SpmPackage', function() {
   it('unknown name', function() {
     (function() {
       getPackage('unknown-name')._parse();
-    }).should.throw('unknown name /a');
+    }).should.throw('unknown name /a in test/fixtures/spm/unknown-name/index.js');
   });
 
   describe('error', function() {
 
     it('not found ./b', function() {
-      var file = join(base, 'not-found/b');
       (function() {
         getPackage('not-found')._parse();
-      }).should.throw(file + ' not found');
+      }).should.throw('test/fixtures/spm/not-found/b not found in test/fixtures/spm/not-found/index.js');
     });
 
     it('not found ./b.js', function() {
-      var file = join(base, 'not-found2/b.js');
       (function() {
         getPackage('not-found2')._parse();
-      }).should.throw(file + ' not found');
+      }).should.throw('test/fixtures/spm/not-found2/b.js not found in test/fixtures/spm/not-found2/index.js');
     });
 
     it('no matched version', function() {
@@ -333,13 +331,13 @@ describe('Father.SpmPackage', function() {
     it('no installed package but required', function() {
       (function() {
         getPackage('no-installed-package')._parse();
-      }).should.throw('b not found but required');
+      }).should.throw('b not found but required in test/fixtures/spm/no-installed-package/index.js');
     });
 
     it('recursive', function() {
       (function() {
         getPackage('recursive')._parse();
-      }).should.throw('found index.js has recursive dependency');
+      }).should.throw('found test/fixtures/spm/recursive/index.js has recursive dependency');
     });
   });
 });
