@@ -186,6 +186,10 @@ what you get in pkg.files is file objects
 
 ```
 var fileObj = pkg.files['a.js'];
+fileObj.pkg
+fileObj.path
+fileObj.extension
+fileObj.fullpath // = fileObj.pkg.dest + fileObj.path
 ```
 
 ### lookup

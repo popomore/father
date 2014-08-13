@@ -2,6 +2,11 @@
 
 ---
 
+## 0.9.0
+
+- now support require file in package just like node
+- file refactor
+
 ## 0.8.7
 
 option moduleDir
