@@ -2,6 +2,10 @@
 
 ---
 
+## 0.9.1
+
+use file cache in package scope not global
+
 ## 0.9.0
 
 - now support require file in package just like node
