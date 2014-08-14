@@ -2,16 +2,11 @@
 
 var join = require('path').join;
 var father = require('..');
-var File = require('../lib/file');
 var SpmPackage = father.SpmPackage;
 var base = join(__dirname, 'fixtures/spm');
 var should = require('should');
 
 describe('Father.SpmPackage', function() {
-
-  beforeEach(function() {
-    File.cache = {};
-  });
 
   it('normal', function() {
     var pkg = getPackage('normal');
@@ -30,6 +25,7 @@ describe('Father.SpmPackage', function() {
     pkgDevDeps['e'].should.eql(pkg.get('e@1.1.0'));
 
     var b = pkg.get('b@1.1.0');
+    b.fileCache.should.equal(pkg.fileCache);
     var bDeps = b.dependencies;
     b.main.should.eql('src/b.js');
     b.name.should.eql('b');
@@ -39,24 +35,28 @@ describe('Father.SpmPackage', function() {
     bDeps['d'].should.eql(pkg.get('d@0.1.0'));
 
     var c = pkg.get('c@1.1.1');
+    c.fileCache.should.equal(pkg.fileCache);
     c.main.should.eql('index.js');
     c.name.should.eql('c');
     c.version.should.eql('1.1.1');
     c.files['index.js'].dependencies.should.eql(['d']);
 
     var d1 = pkg.get('d@0.1.0');
+    d1.fileCache.should.equal(pkg.fileCache);
     d1.main.should.eql('index.js');
     d1.name.should.eql('d');
     d1.version.should.eql('0.1.0');
     d1.files['index.js'].dependencies.should.eql([]);
 
     var d2 = pkg.get('d@0.1.1');
+    d2.fileCache.should.equal(pkg.fileCache);
     d2.main.should.eql('index.js');
     d2.name.should.eql('d');
     d2.version.should.eql('0.1.1');
     d2.files['index.js'].dependencies.should.eql([]);
 
     var e = pkg.get('e@1.1.0');
+    e.fileCache.should.equal(pkg.fileCache);
     e.main.should.eql('src/e.js');
     e.name.should.eql('e');
     e.version.should.eql('1.1.0');
