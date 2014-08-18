@@ -160,6 +160,13 @@ describe('Father.File', function() {
   });
 
   it('ignore package', function() {
+    var pkg = getPackage('normal', {ignore: ['b']});
+    pkg.files['b.js'].lookup(function(fileInfo) {
+      return fileInfo.ignore ? fileInfo.pkg.id : false;
+    }).should.eql(['b@1.1.0', 'c@1.1.1', 'd@0.1.0']);
+  });
+
+  it('ignore package when no dependencies', function() {
     var pkg = getPackage('no-installed-package', {ignore: ['b']});
     pkg.files['index.js'].lookup(function(fileInfo) {
       return fileInfo.ignore ? fileInfo.pkg.name : false;
