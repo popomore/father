@@ -4,7 +4,7 @@
 
 ## 0.9.2
 
-ignore package but can parse files
+ignore package but still parse files
 
 ## 0.9.1
 
