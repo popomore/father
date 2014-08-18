@@ -2,6 +2,10 @@
 
 ---
 
+## 0.9.2
+
+ignore package but can parse files
+
 ## 0.9.1
 
 use file cache in package scope not global
