@@ -2,6 +2,10 @@
 
 ---
 
+## 0.9.4
+
+fix error when require package that name has `.` 
+
 ## 0.9.3
 
 miss extend :smile:
