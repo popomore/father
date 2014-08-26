@@ -189,7 +189,7 @@ describe('Father.SpmPackage', function() {
 
   it('require other extension', function() {
     var pkg = getPackage('require-other-ext');
-    pkg.files['index.js'].dependencies.should.eql(['./a.runtime.js', './jquery.plugin.js', './b.ext']);
+    pkg.files['index.js'].dependencies.should.eql(['./a.runtime.js', './jquery.plugin.js', './b.ext', 'c.js']);
     pkg.files['a.runtime.js'].dependencies.should.eql([]);
     pkg.files['b.ext'].dependencies.should.eql([]);
     pkg.files['jquery.plugin.js'].dependencies.should.eql([]);
@@ -287,7 +287,7 @@ describe('Father.SpmPackage', function() {
   it('unknown name', function() {
     (function() {
       getPackage('unknown-name')._parse();
-    }).should.throw('unknown name /a in test/fixtures/spm/unknown-name/index.js');
+    }).should.throw('unknown name /a required by test/fixtures/spm/unknown-name/index.js');
   });
 
   describe('error', function() {
@@ -295,13 +295,13 @@ describe('Father.SpmPackage', function() {
     it('not found ./b', function() {
       (function() {
         getPackage('not-found')._parse();
-      }).should.throw('test/fixtures/spm/not-found/b not found in test/fixtures/spm/not-found/index.js');
+      }).should.throw('test/fixtures/spm/not-found/b not found that required by test/fixtures/spm/not-found/index.js');
     });
 
     it('not found ./b.js', function() {
       (function() {
         getPackage('not-found2')._parse();
-      }).should.throw('test/fixtures/spm/not-found2/b.js not found in test/fixtures/spm/not-found2/index.js');
+      }).should.throw('test/fixtures/spm/not-found2/b.js not found that required by test/fixtures/spm/not-found2/index.js');
     });
 
     it('no matched version', function() {
@@ -331,7 +331,7 @@ describe('Father.SpmPackage', function() {
     it('no installed package but required', function() {
       (function() {
         getPackage('no-installed-package')._parse();
-      }).should.throw('b not found but required in test/fixtures/spm/no-installed-package/index.js');
+      }).should.throw('b is not in dependencies but required by test/fixtures/spm/no-installed-package/index.js');
     });
 
     it('recursive', function() {

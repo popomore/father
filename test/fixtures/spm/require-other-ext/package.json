@@ -1,4 +1,9 @@
 {
   "name": "a",
-  "version": "1.0.0"
+  "version": "1.0.0",
+  "spm": {
+    "dependencies": {
+      "c.js": "1.0.0"
+    }
+  }
 }
