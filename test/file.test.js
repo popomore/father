@@ -100,6 +100,22 @@ describe('Father.File', function() {
     ]);
   });
 
+  it('lookup file fullpath', function() {
+    var ret = pkg.files['a.js'].lookup(function(fileInfo) {
+      var pkg = fileInfo.pkg;
+      if (pkg.name === 'a') {
+        return fileInfo.fullpath;
+      }
+    });
+    ret.should.eql([
+      'b.js',
+      'a.json',
+      'a.handlebars'
+    ].map(function(item) {
+      return join(pkg.dest, item);
+    }));
+  });
+
   it('lookup extra', function() {
     var extra = [{
       path: 'index.js',

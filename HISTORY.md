@@ -2,6 +2,10 @@
 
 ---
 
+## 0.9.5
+
+add fullpath when lookup fileObj
+
 ## 0.9.4
 
 fix error when require package that name has `.` 
