@@ -2,6 +2,10 @@
 
 ---
 
+## 0.9.6
+
+do not parse require.async now
+
 ## 0.9.5
 
 add fullpath when lookup fileObj
