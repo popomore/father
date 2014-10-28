@@ -2,6 +2,10 @@
 
 ---
 
+## 0.9.7
+
+Improve require priority
+
 ## 0.9.6
 
 do not parse require.async now
