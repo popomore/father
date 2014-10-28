@@ -213,6 +213,14 @@ describe('Father.SpmPackage', function() {
     pkg.files['index.js'].dependencies.should.eql(['./lib.js']);
   });
 
+  it('should require priority a.js > a.json > a/index.js', function() {
+    var pkg = getPackage('require-priority');
+    should.exist(pkg.files['a.js']);
+    should.not.exist(pkg.files['a.json']);
+    should.exist(pkg.files['b.json']);
+    should.not.exist(pkg.files['b/index.js']);
+  });
+
   it('should support relative main', function() {
     var pkg = getPackage('relative-main');
     Object.keys(pkg.files).length.should.eql(1);
