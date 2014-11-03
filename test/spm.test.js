@@ -164,9 +164,6 @@ describe('Father.SpmPackage', function() {
     pkg.set({id: 'b@1.1.0'});
     pkg.get('b@1.1.0').should.eql({id: 'b@1.1.0'});
 
-    pkg._parse();
-    pkg.get('b@1.1.0').should.eql({id: 'b@1.1.0'});
-
     pkg.set({id: 'b@1.1.0', name: 'b'});
     pkg.get('b@1.1.0').should.eql({id: 'b@1.1.0'});
   });
@@ -294,7 +291,7 @@ describe('Father.SpmPackage', function() {
 
   it('unknown name', function() {
     (function() {
-      getPackage('unknown-name')._parse();
+      getPackage('unknown-name');
     }).should.throw('unknown name /a required by test/fixtures/spm/unknown-name/index.js');
   });
 
@@ -302,31 +299,31 @@ describe('Father.SpmPackage', function() {
 
     it('not found ./b', function() {
       (function() {
-        getPackage('not-found')._parse();
+        getPackage('not-found');
       }).should.throw('test/fixtures/spm/not-found/b not found that required by test/fixtures/spm/not-found/index.js');
     });
 
     it('not found ./b.js', function() {
       (function() {
-        getPackage('not-found2')._parse();
+        getPackage('not-found2');
       }).should.throw('test/fixtures/spm/not-found2/b.js not found that required by test/fixtures/spm/not-found2/index.js');
     });
 
     it('no matched version', function() {
       (function() {
-        getPackage('unmatch-version')._parse();
+        getPackage('unmatch-version');
       }).should.throw('no matched version of a');
     });
 
     it('detect main type', function() {
       (function() {
-        getPackage('main-type-error')._parse();
+        getPackage('main-type-error');
       }).should.throw('pkg.spm.main should be string.');
     });
 
     it('detect output type', function() {
       (function() {
-        getPackage('output-type-error')._parse();
+        getPackage('output-type-error');
       }).should.throw('pkg.spm.output should be array.');
     });
 
@@ -338,13 +335,13 @@ describe('Father.SpmPackage', function() {
 
     it('no installed package but required', function() {
       (function() {
-        getPackage('no-installed-package')._parse();
+        getPackage('no-installed-package');
       }).should.throw('b is not in dependencies but required by test/fixtures/spm/no-installed-package/index.js');
     });
 
     it('recursive', function() {
       (function() {
-        getPackage('recursive')._parse();
+        getPackage('recursive');
       }).should.throw('found test/fixtures/spm/recursive/index.js has recursive dependency');
     });
   });
