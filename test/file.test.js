@@ -192,5 +192,7 @@ describe('Father.File', function() {
 });
 
 function getPackage(name, options) {
+  options = options || {};
+  options.moduleDir = 'sea-modules';
   return new SpmPackage(join(base, name), options);
 }

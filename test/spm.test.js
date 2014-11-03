@@ -258,8 +258,8 @@ describe('Father.SpmPackage', function() {
     should.not.exists(pkgB.dependencies['no-exist']);
   });
 
-  it('moduleDir', function() {
-    var pkg = getPackage('module-dir', {moduleDir: 'spm-modules'});
+  it('default moduleDir', function() {
+    var pkg = new SpmPackage(join(base, 'module-dir'));
     pkg.files[pkg.main].dependencies.should.eql(['b']);
   });
 
@@ -351,5 +351,7 @@ describe('Father.SpmPackage', function() {
 });
 
 function getPackage(name, options) {
+  options = options || {};
+  if (!options.moduleDir) options.moduleDir = 'sea-modules';
   return new SpmPackage(join(base, name), options);
 }
