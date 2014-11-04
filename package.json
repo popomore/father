@@ -17,6 +17,7 @@
     "istanbul": "~0.2.6",
     "mocha": "~1.17.1",
     "should": "~4.0.4",
+    "jshint": "2",
     "totoro": "1"
   },
   "repository": {
