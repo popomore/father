@@ -271,13 +271,13 @@ describe('Father.SpmPackage', function() {
     var deps = pkg.files['index.js']._dependencies;
     Object.keys(deps).length.should.eql(4);
     deps['b'].pkg.name.should.eql('b');
-    deps['b'].path.should.eql('index.js');
+    deps['b'].relative.should.eql('index.js');
     deps['b/a'].pkg.name.should.eql('b');
-    deps['b/a'].path.should.eql('a.js');
+    deps['b/a'].relative.should.eql('a.js');
     deps['b/lib'].pkg.name.should.eql('b');
-    deps['b/lib'].path.should.eql('lib/index.js');
+    deps['b/lib'].relative.should.eql('lib/index.js');
     deps['b/lib/b.js'].pkg.name.should.eql('b');
-    deps['b/lib/b.js'].path.should.eql('lib/b.js');
+    deps['b/lib/b.js'].relative.should.eql('lib/b.js');
 
     var pkgB = pkg.get('b@1.0.0');
     pkgB.files['lib/b.js'].dependencies.should.eql(['c/c.js']);
