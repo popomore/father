@@ -25,7 +25,7 @@ describe('Father.SpmPackage', function() {
     pkgDevDeps['e'].should.eql(pkg.getPackage('e@1.1.0'));
 
     var b = pkg.getPackage('b@1.1.0');
-    b.fileCache.should.equal(pkg.fileCache);
+    b._files.should.equal(pkg._files);
     var bDeps = b.dependencies;
     b.main.should.eql('src/b.js');
     b.name.should.eql('b');
@@ -35,28 +35,28 @@ describe('Father.SpmPackage', function() {
     bDeps['d'].should.eql(pkg.getPackage('d@0.1.0'));
 
     var c = pkg.getPackage('c@1.1.1');
-    c.fileCache.should.equal(pkg.fileCache);
+    c._files.should.equal(pkg._files);
     c.main.should.eql('index.js');
     c.name.should.eql('c');
     c.version.should.eql('1.1.1');
     c.files['index.js'].dependencies.should.eql(['d']);
 
     var d1 = pkg.getPackage('d@0.1.0');
-    d1.fileCache.should.equal(pkg.fileCache);
+    d1._files.should.equal(pkg._files);
     d1.main.should.eql('index.js');
     d1.name.should.eql('d');
     d1.version.should.eql('0.1.0');
     d1.files['index.js'].dependencies.should.eql([]);
 
     var d2 = pkg.getPackage('d@0.1.1');
-    d2.fileCache.should.equal(pkg.fileCache);
+    d2._files.should.equal(pkg._files);
     d2.main.should.eql('index.js');
     d2.name.should.eql('d');
     d2.version.should.eql('0.1.1');
     d2.files['index.js'].dependencies.should.eql([]);
 
     var e = pkg.getPackage('e@1.1.0');
-    e.fileCache.should.equal(pkg.fileCache);
+    e._files.should.equal(pkg._files);
     e.main.should.eql('src/e.js');
     e.name.should.eql('e');
     e.version.should.eql('1.1.0');
