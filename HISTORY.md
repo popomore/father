@@ -2,6 +2,14 @@
 
 ---
 
+## 0.10.0
+
+- use spm_modules as moduleDir by default
+- parse package when initialization, not lazy
+- file object extend vinyl
+- change api: get -> getPackage, set -> setPackage
+- new api: getFile, getFiles
+
 ## 0.9.7
 
 Improve require priority

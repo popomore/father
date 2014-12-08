@@ -82,17 +82,25 @@ Export files when build
 
 ## Method
 
-### pkg.get(pkg.id)
+### pkg.getPackage(pkg.id)
 
-Get a package of id
+Get a package by id
 
-### pkg.set(pkg)
+### pkg.setPackage(pkg)
 
 Set a package
 
 ### pkg.getPackages()
 
 Get all dependent packages
+
+### pkg.getFile(fullpath)
+
+Get file object by given path
+
+### pkg.getFiles()
+
+Get all file objects
 
 ## Options
 
@@ -182,14 +190,14 @@ Where is your modules
 
 ## File object
 
-what you get in pkg.files is file objects
+what you get in pkg.files is file objects that is extending [vinyl](https://github.com/wearefractal/vinyl).
 
 ```
 var fileObj = pkg.files['a.js'];
 fileObj.pkg
-fileObj.path
+fileObj.relative
 fileObj.extension
-fileObj.fullpath // = fileObj.pkg.dest + fileObj.path
+fileObj.path // = fileObj.pkg.dest + fileObj.relative
 ```
 
 ### lookup
@@ -198,7 +206,8 @@ lookup all dependencies and can be filtered or transformed in callback
 
 ```
 fileObj.lookup(function(fileInfo) {
-  // fileInfo.filepath: filepath in package
+  // fileInfo.path: filepath of fileinfo
+  // fileInfo.relative: filepath based on packagge
   // fileInfo.pkg: package info
   // fileInfo.isRelative: required by file in the same package
   // fileInfo.dependent: dependent package
