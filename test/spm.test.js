@@ -72,8 +72,8 @@ describe('Father.SpmPackage', function() {
 
   it('output', function() {
     var pkg = getPackage('output');
-    pkg.output.should.eql(['a.js', 'b.js', 'glob/c.js']);
-    Object.keys(pkg.files).should.eql(['index.js','a.js', 'a1.js', 'b.js', 'b1.js', 'glob/c.js', 'c1.js']);
+    pkg.output.should.eql(['a.js', 'b.js', 'glob/c.js', 'a.jpg']);
+    Object.keys(pkg.files).should.eql(['index.js','a.js', 'a1.js', 'b.js', 'b1.js', 'glob/c.js', 'c1.js', 'a.jpg']);
   });
 
   it('output glob duplicate', function() {

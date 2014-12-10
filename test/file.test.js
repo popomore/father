@@ -176,7 +176,7 @@ describe('Father.File', function() {
     }
   });
 
-  it('ignore package', function() {
+  xit('ignore package', function() {
     var pkg = getPackage('normal', {ignore: ['b']});
     pkg.files['b.js'].lookup(function(fileInfo) {
       return fileInfo.ignore ? fileInfo.pkg.id : false;
