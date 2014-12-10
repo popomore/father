@@ -292,14 +292,19 @@ describe('Father.SpmPackage', function() {
 
   it('require file in package', function() {
     var pkg = getPackage('file-in-package');
-    pkg.files['index.js'].dependencies.should.eql([
-      'b',
+    pkg.files['index.js'].lookup(function(finfo) {
+      return finfo.ignore ? false : finfo.pkg.name + '/' + finfo.relative;
+    }).should.eql([
+      'b/index.js',
       'b/a.js',
       'b/lib/index.js',
-      'b/lib/b.js'
+      'b/lib/b.js',
+      'c/c.js',
+      'c/index.js'
     ]);
+
     var deps = pkg.files['index.js']._dependencies;
-    Object.keys(deps).length.should.eql(4);
+    Object.keys(deps).length.should.eql(5);
     deps['b'].pkg.name.should.eql('b');
     deps['b'].relative.should.eql('index.js');
     deps['b/a'].pkg.name.should.eql('b');
@@ -317,6 +322,20 @@ describe('Father.SpmPackage', function() {
 
     var pkgC = pkg.getPackage('c@1.0.0');
     should.exist(pkgC.files['c.js']);
+  });
+
+  it('ignore file in package', function() {
+    var pkg = getPackage('file-in-package', {
+      ignore: ['c']
+    });
+    pkg.files['index.js'].lookup(function(finfo) {
+      return finfo.ignore ? false : finfo.pkg.name + '/' + finfo.relative;
+    }).should.eql([
+      'b/index.js',
+      'b/a.js',
+      'b/lib/index.js',
+      'b/lib/b.js'
+    ]);
   });
 
   it('unknown name', function() {
