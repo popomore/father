@@ -2,6 +2,10 @@
 
 ---
 
+## 0.10.1
+
+searequire -> crequire
+
 ## 0.10.0
 
 - use spm_modules as moduleDir by default
