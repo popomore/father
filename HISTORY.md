@@ -2,6 +2,10 @@
 
 ---
 
+## 0.10.2
+
+support parsing spm.engines
+
 ## 0.10.1
 
 searequire -> crequire

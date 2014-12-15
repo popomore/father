@@ -344,6 +344,12 @@ describe('Father.SpmPackage', function() {
     }).should.throw('unknown name /a required by test/fixtures/spm/unknown-name/index.js');
   });
 
+  it('should parse engines', function() {
+    var pkg = getPackage('engines');
+    var pkgB = pkg.getPackage('b@1.1.0');
+    pkgB.main.should.eql('src/b.js');
+  });
+
   describe('error', function() {
 
     it('not found ./b', function() {
