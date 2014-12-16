@@ -350,6 +350,13 @@ describe('Father.SpmPackage', function() {
     pkgB.main.should.eql('src/b.js');
   });
 
+  it('symlink deps', function() {
+    var pkg;
+    pkg = getPackage('symlink-deps');
+    pkg = getPackage('symlink-deps');
+    pkg.name.should.be.equal('a');
+  });
+
   describe('error', function() {
 
     it('not found ./b', function() {
