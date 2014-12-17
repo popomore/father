@@ -357,6 +357,16 @@ describe('Father.SpmPackage', function() {
     pkg.name.should.be.equal('a');
   });
 
+  it('should get buildArgs', function() {
+    var pkg = getPackage('normal');
+    pkg.origin.spm.buildArgs.should.eql({
+      '_': [],
+      include: 'all',
+      ignore: ['jquery', 'context'],
+      skip: ['node']
+    });
+  });
+
   describe('error', function() {
 
     it('not found ./b', function() {

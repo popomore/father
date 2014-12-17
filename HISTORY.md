@@ -2,6 +2,10 @@
 
 ---
 
+## 0.10.4
+
+SpmPackage parse spm.buildArgs
+
 ## 0.10.3
 
 fix require cache delete for symlink deps

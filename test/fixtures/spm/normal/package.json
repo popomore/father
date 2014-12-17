@@ -11,6 +11,7 @@
     },
     "devDependencies": {
       "e": "1.1.0"
-    }
+    },
+    "buildArgs": "--include all --ignore jquery,context --skip node"
   }
 }
