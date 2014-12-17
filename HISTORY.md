@@ -2,6 +2,10 @@
 
 ---
 
+## 0.10.3
+
+fix require cache delete for symlink deps
+
 ## 0.10.2
 
 support parsing spm.engines
