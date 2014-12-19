@@ -2,6 +2,10 @@
 
 ---
 
+## 0.10.5
+
+add detecting spm_modules of current package
+
 ## 0.10.4
 
 SpmPackage parse spm.buildArgs
