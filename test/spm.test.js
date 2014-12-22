@@ -117,6 +117,12 @@ describe('Father.SpmPackage', function() {
     pkg.dependencies.b.dependencies.c.version.should.be.equal('0.4.0');
   });
 
+  it('resolve deps in pkg, deep', function() {
+    var pkg = getPackage('resolve-deps-in-pkg-deep');
+    pkg.dependencies.b.dependencies.c.should.be.truthy;
+    pkg.dependencies.b.dependencies.c.dependencies.d.should.be.truthy;
+  });
+
   it('css', function() {
     var pkg = getPackage('css');
     Object.keys(pkg.files).should.eql(['index.css', 'base.css', 'other.css']);
