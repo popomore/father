@@ -2,6 +2,10 @@
 
 ---
 
+## 0.10.6
+
+Detect spm_modules of current package before one of root package
+
 ## 0.10.5
 
 add detecting spm_modules of current package
