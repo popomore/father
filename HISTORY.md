@@ -2,6 +2,10 @@
 
 ---
 
+## 0.11.0
+
+feat(file): filename should be case sensitive on cross-platform
+
 ## 0.10.6
 
 Detect spm_modules of current package before one of root package
