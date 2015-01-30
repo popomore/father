@@ -433,6 +433,12 @@ describe('Father.SpmPackage', function() {
         getPackage('recursive');
       }).should.throw('found test/fixtures/spm/recursive/index.js has recursive dependency');
     });
+
+    it('should require file case sensitive', function() {
+      (function() {
+        getPackage('case-sensitive');
+      }).should.throw('test/fixtures/spm/case-sensitive/a.js not found that required by test/fixtures/spm/case-sensitive/index.js');
+    });
   });
 });
 
