@@ -2,6 +2,10 @@
 
 ---
 
+## 0.12.0
+
+feat(file) get hash from File object
+
 ## 0.11.0
 
 feat(file): filename should be case sensitive on cross-platform
