@@ -384,6 +384,20 @@ describe('Father.SpmPackage', function() {
     });
   });
 
+  it('should return hash', function() {
+    var pkg = getPackage('hash', {ignore: ['jquery']});
+
+    should.not.exists(pkg.files['a1.js']._hash);
+    pkg.files['a1.js'].hash.should.eql('d2b46934');
+    // get cache after generated
+    pkg.files['a1.js']._hash.should.eql('d2b46934');
+    pkg.files['a1.js'].hash.should.eql('d2b46934');
+
+    pkg.files['a2.js'].hash.should.eql('81a9a8c4');
+    pkg.files['a3.js'].hash.should.eql('3434e45f');
+    pkg.files['a4.js'].hash.should.eql('6e9b1eb2');
+  });
+
   describe('error', function() {
 
     it('not found ./b', function() {
