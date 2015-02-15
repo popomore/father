@@ -1,7 +1,3 @@
-# History
-
----
-
 ## 0.12.0
 
 feat(file) get hash from File object
