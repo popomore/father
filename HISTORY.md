@@ -1,3 +1,7 @@
+## 0.13.0 / 2015-02-15
+
+- feat(file): improve file object
+
 ## 0.12.0
 
 feat(file) get hash from File object
