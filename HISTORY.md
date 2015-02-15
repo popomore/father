@@ -1,3 +1,7 @@
+## 0.13.1 / 2015-02-15
+
+- feat(file): export File.extend
+
 ## 0.13.0 / 2015-02-15
 
 - feat(file): improve file object
