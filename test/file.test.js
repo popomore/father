@@ -10,6 +10,14 @@ var should = require('should');
 describe('Father.File', function() {
   var pkg = getPackage('normal');
 
+  it('should not set path of fileinfo', function() {
+    pkg.files['a.js'].lookup(function(fileInfo) {
+      (function() {
+        fileInfo.path = '';
+      }).should.throw('Cannot set property path of #<Object> which has only a getter');
+    });
+  });
+
   it('lookup all deps', function() {
     var ret = pkg.files['a.js'].lookup(function(fileInfo) {
       var pkg = fileInfo.pkg;
