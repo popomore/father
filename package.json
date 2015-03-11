@@ -21,7 +21,7 @@
     "jshint": "2",
     "mocha": "1",
     "should": "~5.0.0",
-    "totoro": "1"
+    "totoro": "2"
   },
   "repository": {
     "type": "git",
@@ -31,7 +31,11 @@
   "author": "popomore <sakura9515@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "test": "jshint . && istanbul cover node_modules/mocha/bin/_mocha -- -R spec -t 20000",
-    "autod": "autod -e test/fixtures -f ~ -w"
+    "lint": "jshint .",
+    "test": "_mocha -R spec -t 20000",
+    "cov": "jshint . && istanbul cover node_modules/mocha/bin/_mocha -- -R spec -t 20000",
+    "coveralls": "cat ./coverage/lcov.info | coveralls",
+    "autod": "autod -e test/fixtures -f ~ -w",
+    "totoro": "totoro --runner test/spm.test.js -b 'windows7/node/0.10,linux/node/0.10'"
   }
 }
