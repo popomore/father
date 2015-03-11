@@ -2,6 +2,7 @@
 
 var join = require('path').join;
 var father = require('..');
+var winPath = require('../lib/util').winPath;
 var SpmPackage = father.SpmPackage;
 var base = join(__dirname, 'fixtures/spm');
 var should = require('should');
@@ -212,9 +213,10 @@ describe('Father.SpmPackage', function() {
 
   it('getFiles method', function() {
     var pkg = getPackage('normal');
+    var prefix = join(base, 'normal');
     var files = pkg.getFiles();
     Object.keys(files).map(function(item) {
-      return item.replace(join(base, 'normal'), '');
+      return winPath(item.replace(prefix, ''));
     }).should.eql([
       '/sea-modules/d/0.1.0/index.js',
       '/sea-modules/c/1.1.1/index.js',
@@ -367,12 +369,14 @@ describe('Father.SpmPackage', function() {
     pkgB.main.should.eql('src/b.js');
   });
 
-  it('symlink deps', function() {
-    var pkg;
-    pkg = getPackage('symlink-deps');
-    pkg = getPackage('symlink-deps');
-    pkg.name.should.be.equal('a');
-  });
+  if (process.platform !== 'win32') {
+    it('symlink deps', function() {
+      var pkg;
+      pkg = getPackage('symlink-deps');
+      pkg = getPackage('symlink-deps');
+      pkg.name.should.be.equal('a');
+    });
+  }
 
   it('should get buildArgs', function() {
     var pkg = getPackage('normal');
