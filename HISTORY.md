@@ -1,3 +1,7 @@
+## 0.14.0 / 2015-03-18
+
+- feat(package): don't throw error for recursive dependency
+
 ## 0.13.1 / 2015-02-15
 
 - feat(file): export File.extend
