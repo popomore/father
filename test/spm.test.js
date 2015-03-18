@@ -446,7 +446,7 @@ describe('Father.SpmPackage', function() {
       }).should.throw('b is not in dependencies but required by test/fixtures/spm/no-installed-package/index.js');
     });
 
-    it('recursive', function() {
+    xit('recursive', function() {
       (function() {
         getPackage('recursive');
       }).should.throw('found test/fixtures/spm/recursive/index.js has recursive dependency');
