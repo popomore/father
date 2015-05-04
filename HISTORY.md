@@ -1,3 +1,8 @@
+
+## 1.0.0 / 2015-05-04
+
+- feat: parse ~ prefix css deps as module, else as file
+
 ## 0.14.0 / 2015-03-18
 
 - feat(package): don't throw error for recursive dependency
